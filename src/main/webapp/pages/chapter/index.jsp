@@ -16,7 +16,7 @@
     <title>Jack邱学习网</title>
     <base href="${basePath}/"/>
     <!-- Bootstrap core CSS -->
-    <%--<link href="assets/bootstrap-3.3.0/css/bootstrap.min.css" rel="stylesheet">--%>
+    <link href="assets/bootstrap-3.3.0/css/bootstrap.min.css" rel="stylesheet">
     <%--<link href="assets/bootstrap-table-1.11.0/bootstrap-table.min.css" rel="stylesheet">--%>
 
     <%--<link rel="stylesheet" href="assets/css/chapter/index.css">--%>
@@ -71,12 +71,12 @@
     <%--<div class="zTreeDemoBackground left">--%>
         <%--<ul id="chapter-tree" class="ztree"></ul>--%>
     <%--</div>--%>
-<%--<script src="assets/jquery-3.1.1/jquery-3.1.1.min.js"></script>--%>
+<script src="assets/jquery-3.1.1/jquery-3.1.1.min.js"></script>
     <%--<script src="assets/zTree/js/jquery.ztree.all.js"></script>--%>
-<%--<script src="assets/bootstrap-3.3.0/js/bootstrap.min.js"></script>--%>
+<script src="assets/bootstrap-3.3.0/js/bootstrap.min.js"></script>
 <%--<script src="assets/bootstrap-table-1.11.0/bootstrap-table.min.js"></script>--%>
 <%--<script src="assets/bootstrap-table-1.11.0/local/bootstrap-table-zh-cn.js"></script>--%>
-<%--<script src="assets/js/chapter/index.js"></script>--%>
+<script src="assets/js/chapter/index.js"></script>
     <%--<!-- zTree -->--%>
     <%--<link href="assets/zTree/css/zTreeStyle/zTreeStyle.css" rel="stylesheet">--%>
 </body>
