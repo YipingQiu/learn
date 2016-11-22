@@ -10,4 +10,8 @@ import java.util.List;
 public interface ChapterDao {
 
     public List<ChapterBase> queryAllTree();
+
+    public void deleteNode(ChapterBase chapter);
+
+    public Long updateNode(ChapterBase chapter);
 }

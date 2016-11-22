@@ -20,4 +20,12 @@ public class ChapterServiceImpl implements ChapterService {
     public List<ChapterBase> queryAllTree() {
         return chapterDaoImpl.queryAllTree();
     }
+
+    public void deleteNode(ChapterBase chapter) {
+        chapterDaoImpl.deleteNode(chapter);
+    }
+
+    public Long updateNode(ChapterBase chapter) {
+        return chapterDaoImpl.updateNode(chapter);
+    }
 }
