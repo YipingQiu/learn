@@ -47,12 +47,6 @@ $(document).ready(function () {
             // console.log(html);
             $('#chapter-tree').html(html);
             chapter.eventBind();
-            // var tree = {};
-            // tree.id = 'root';
-            // tree.children = [];
-            // tree.children = chapter.childrenTraverse(tree.children, $('#chapter-tree'));
-            // console.log(tree);
-            // console.log(root);
         },
         eventBind: function () {
             $('.tree-span').click(function () {
@@ -65,15 +59,31 @@ $(document).ready(function () {
             $('.tree-node').on('drag',function () {
                 console.log(2222);
             });
-            $('.tree-node').on('dragstart',function () {
-                console.log(111111);
+
+            $('.tree-node').on('dragstart',function (e) {
+                e.dataTransfer = e.originalEvent.dataTransfer;
+                e.dataTransfer.setData("Text", $(e.target).attr('node-id'));
             });
+
             $('.tree-node').on('dragend',function () {
                 console.log(3333);
             });
-            // $('.tree-span').onDragStart(function (ev) {
-            //     ev.dataTransfer.setData("Text",ev.target.id);
-            // });
+
+            $('.tree-node').on('dragover',function (e) {
+                e.preventDefault();
+            });
+            
+            $('.tree-node').on('drop',function (e) {
+                e.preventDefault();
+                e.dataTransfer = e.originalEvent.dataTransfer;
+                var data = e.dataTransfer.getData('Text');
+                console.log(data);
+                console.log(e.target);
+                // $(e.target).append('<ul><li><span>123</span></li></ul>');
+                // e.target.append('<ul><li><span>123</span></li></ul>');
+                $(e.target).append($('[node-id='+ data + ']'));
+            });
+
             $('.tree-span').contextmenu(function (event) {
                 event.preventDefault();
                 if ($(this).next().is(':hidden')) {
