@@ -77,7 +77,7 @@
 <script src="assets/bootstrap-3.3.0/js/bootstrap.min.js"></script>
 <%--<script src="assets/bootstrap-table-1.11.0/bootstrap-table.min.js"></script>--%>
 <%--<script src="assets/bootstrap-table-1.11.0/local/bootstrap-table-zh-cn.js"></script>--%>
-<script src="assets/js/chapter/index.js"></script>
+<script type="application/javascript" src="assets/js/chapter/index.js"></script>
     <%--<!-- zTree -->--%>
     <%--<link href="assets/zTree/css/zTreeStyle/zTreeStyle.css" rel="stylesheet">--%>
 </body>

@@ -56,32 +56,46 @@ $(document).ready(function () {
                     $(this).next().hide();
                 }
             });
-            $('.tree-node').on('drag',function () {
+            $('.tree-node').on('drag',function (e) {
+                e.stopPropagation();
                 console.log(2222);
             });
 
             $('.tree-node').on('dragstart',function (e) {
+                e.stopPropagation();
                 e.dataTransfer = e.originalEvent.dataTransfer;
                 e.dataTransfer.setData("Text", $(e.target).attr('node-id'));
             });
 
-            $('.tree-node').on('dragend',function () {
+            $('.tree-node').on('dragend',function (e) {
+                e.stopPropagation();
                 console.log(3333);
             });
 
             $('.tree-node').on('dragover',function (e) {
+                e.stopPropagation();
                 e.preventDefault();
             });
             
             $('.tree-node').on('drop',function (e) {
+                e.stopPropagation();
                 e.preventDefault();
                 e.dataTransfer = e.originalEvent.dataTransfer;
                 var data = e.dataTransfer.getData('Text');
                 console.log(data);
                 console.log(e.target);
+                console.log($(e.target).html());
                 // $(e.target).append('<ul><li><span>123</span></li></ul>');
                 // e.target.append('<ul><li><span>123</span></li></ul>');
-                $(e.target).append($('[node-id='+ data + ']'));
+                // console.log();
+                if($(e.target).find('ul').html() == undefined){
+                    console.log('ok');
+                    $(e.target).append('<ul></ul>');
+                    $(e.target).find('ul').append($('[node-id='+ data + ']'));
+                }else{
+                    $(e.target).find('ul:eq(0)').append($('[node-id='+ data + ']'));
+                }
+                // $(e.target).append($('[node-id='+ data + ']'));
             });
 
             $('.tree-span').contextmenu(function (event) {
