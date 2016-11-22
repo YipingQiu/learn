@@ -58,7 +58,6 @@ $(document).ready(function () {
             });
             $('.tree-node').on('drag',function (e) {
                 e.stopPropagation();
-                console.log(2222);
             });
 
             $('.tree-node').on('dragstart',function (e) {
@@ -69,7 +68,6 @@ $(document).ready(function () {
 
             $('.tree-node').on('dragend',function (e) {
                 e.stopPropagation();
-                console.log(3333);
             });
 
             $('.tree-node').on('dragover',function (e) {
@@ -82,20 +80,16 @@ $(document).ready(function () {
                 e.preventDefault();
                 e.dataTransfer = e.originalEvent.dataTransfer;
                 var data = e.dataTransfer.getData('Text');
-                console.log(data);
-                console.log(e.target);
-                console.log($(e.target).html());
-                // $(e.target).append('<ul><li><span>123</span></li></ul>');
-                // e.target.append('<ul><li><span>123</span></li></ul>');
-                // console.log();
-                if($(e.target).find('ul').html() == undefined){
-                    console.log('ok');
-                    $(e.target).append('<ul></ul>');
-                    $(e.target).find('ul').append($('[node-id='+ data + ']'));
-                }else{
-                    $(e.target).find('ul:eq(0)').append($('[node-id='+ data + ']'));
+                if($(this).attr('node-id') == data){
+                    return;
                 }
-                // $(e.target).append($('[node-id='+ data + ']'));
+                if($(e.target).find('ul').html() == undefined){
+                    $(this).append('<ul></ul>');
+                    $(this).find('ul').append($('[node-id='+ data + ']'));
+                }else{
+                    $(this).find('ul:eq(0)').append($('[node-id='+ data + ']'));
+                }
+                chapter.loadSaveDiv();
             });
 
             $('.tree-span').contextmenu(function (event) {
