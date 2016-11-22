@@ -62,6 +62,18 @@ $(document).ready(function () {
                     $(this).next().hide();
                 }
             });
+            $('.tree-node').on('drag',function () {
+                console.log(2222);
+            });
+            $('.tree-node').on('dragstart',function () {
+                console.log(111111);
+            });
+            $('.tree-node').on('dragend',function () {
+                console.log(3333);
+            });
+            // $('.tree-span').onDragStart(function (ev) {
+            //     ev.dataTransfer.setData("Text",ev.target.id);
+            // });
             $('.tree-span').contextmenu(function (event) {
                 event.preventDefault();
                 if ($(this).next().is(':hidden')) {
@@ -210,7 +222,7 @@ $(document).ready(function () {
         },
         paintTree: function (node, html) {
             if (node.id != 'root') {
-                html += '<li class="tree-node" node-id="' + node.id + '">';
+                html += '<li class="tree-node" draggable="true" node-id="' + node.id + '">';
                 html += '<span class="tree-span">' + node.title + '</span>';
                 var children = node.children;
                 if (children == undefined) {
