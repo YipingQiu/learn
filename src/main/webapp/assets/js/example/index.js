@@ -53,5 +53,9 @@ $(document).ready(
     }),
     $('#chapter-lbl').on('click', function () {
         $('#chapter-modal').modal('show');
+    }),
+    $('#chapter').focus(function () {
+        $('body').append("<div id='tree'></div>");
+
     })
 );
