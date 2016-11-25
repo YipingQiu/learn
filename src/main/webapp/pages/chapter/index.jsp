@@ -20,10 +20,10 @@
     <link href="assets/bootstrap-3.3.0/css/bootstrap.min.css" rel="stylesheet">
     <%--<link href="assets/bootstrap-table-1.11.0/bootstrap-table.min.css" rel="stylesheet">--%>
 
-    <%--<link rel="stylesheet" href="assets/css/chapter/index.css">--%>
+    <link rel="stylesheet" href="assets/css/chapter/index.css">
 </head>
 <body>
-    <div id="chapter-tree">
+    <div id="chapter-tree" draggable="true">
         <ul>
             <li>
                 <span>白日依山尽</span>

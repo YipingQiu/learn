@@ -44,7 +44,6 @@ $(document).ready(function () {
                 }
             }
             var html = chapter.paintTree(root, '');
-            // console.log(html);
             $('#chapter-tree').html(html);
             chapter.eventBind();
         },
@@ -70,27 +69,48 @@ $(document).ready(function () {
                 e.stopPropagation();
             });
 
-            $('.tree-node').on('dragover',function (e) {
+            $('#chapter-tree, .tree-node').on('dragover',function (e) {
                 e.stopPropagation();
                 e.preventDefault();
             });
-            
+
+            $('#chapter-tree').on('drop',function (e) {
+                e.preventDefault();
+                e.dataTransfer = e.originalEvent.dataTransfer;
+                var data = e.dataTransfer.getData("Text");
+                $(this).find('ul:eq(0)').append($('[node-id='+ data + ']'));
+                chapter.loadSaveDiv();
+            });
+
             $('.tree-node').on('drop',function (e) {
                 e.stopPropagation();
                 e.preventDefault();
                 e.dataTransfer = e.originalEvent.dataTransfer;
                 var data = e.dataTransfer.getData('Text');
-                if($(this).attr('node-id') == data){
-                    return;
-                }
-                if($(e.target).find('ul').html() == undefined){
-                    $(this).append('<ul></ul>');
-                    $(this).find('ul').append($('[node-id='+ data + ']'));
-                }else{
-                    $(this).find('ul:eq(0)').append($('[node-id='+ data + ']'));
+                var move = $('[node-id='+ data + ']');
+
+                var mouseY = e.pageY;
+                var nodeTop = $(e.target).offset().top;
+                var nodeHeight = $(e.target).height();
+
+                if(mouseY < nodeTop + 5){
+                    $(this).before(move);
+                }else if(mouseY > nodeTop + nodeHeight - 5){
+                    $(this).after(move);
+                }else {
+                    if($(this).attr('node-id') == data){
+                        return;
+                    }
+                    if($(this).find('ul').html() == undefined){
+                        $(this).append('<ul></ul>');
+                        $(this).find('ul').append(move);
+                    }else{
+                        $(this).find('ul:eq(0)').append(move);
+                    }
                 }
                 chapter.loadSaveDiv();
             });
+
 
             $('.tree-span').contextmenu(function (event) {
                 event.preventDefault();
@@ -101,11 +121,17 @@ $(document).ready(function () {
                 var html = '';
                 html += '<div id="tree-menu" node-id="' + nodeId + '">';
                 html += '<ul>';
+                if($(this).parent().prev().html() != undefined){
+                    html += '<li><span><a href="javascript:;" class="node-up">节点上移</a></span></li>';
+                }
                 html += '<li><span><a href="javascript:;" class="add-child">增加子节点</a></span></li>';
                 html += '<li><span><a href="javascript:;" class="add-prev">增加前驱节点</a></span></li>';
                 html += '<li><span><a href="javascript:;" class="add-next">增加后继节点</a></span></li>';
                 html += '<li><span><a href="javascript:;" class="modify-name">修改名称</a></span></li>';
                 html += '<li><span><a href="javascript:;" class="remove-node">删除节点</a></span></li>';
+                if($(this).parent().next().html() != undefined){
+                    html += '<li><span><a href="javascript:;" class="node-down">节点下移</a></span></li>';
+                }
                 html += '</ul>';
                 html += '</div>';
                 $('body').append(html);
@@ -128,6 +154,8 @@ $(document).ready(function () {
                     || targetClass == 'add-next'
                     || targetClass == 'modify-name'
                     || targetClass == 'remove-node'
+                    || targetClass == 'node-up'
+                    || targetClass == 'node-down'
                 ) {
                     return;
                 }
@@ -137,6 +165,22 @@ $(document).ready(function () {
             });
         },
         menuEventBind: function () {
+
+            $('.node-up').click(function () {
+                $('#tree-menu').remove();
+                var nodeId = $(this).parent().parent().parent().parent().attr('node-id');
+                var node = $('.tree-node[node-id=' + nodeId + ']');
+                node.after(node.prev());
+                chapter.loadSaveDiv();
+            });
+
+            $('.node-down').click(function () {
+                $('#tree-menu').remove();
+                var nodeId = $(this).parent().parent().parent().parent().attr('node-id');
+                var node = $('.tree-node[node-id=' + nodeId + ']');
+                node.before(node.next());
+                chapter.loadSaveDiv();
+            });
 
             $('.remove-node').click(function () {
                 var nodeId = $(this).parent().parent().parent().parent().attr('node-id');
