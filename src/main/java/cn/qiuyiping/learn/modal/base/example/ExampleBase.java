@@ -19,6 +19,21 @@ public class ExampleBase {
 
     private String translation; //范例中文翻译
 
+
+    public ExampleBase() {
+    }
+
+    public ExampleBase(String title) {
+        this.title = title;
+    }
+
+    public ExampleBase(Long id, String title, String content, String translation) {
+        this.id = id;
+        this.title = title;
+        this.content = content;
+        this.translation = translation;
+    }
+
     public Long getId() {
         return id;
     }

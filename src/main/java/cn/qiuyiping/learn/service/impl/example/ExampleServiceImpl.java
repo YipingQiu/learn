@@ -29,4 +29,16 @@ public class ExampleServiceImpl implements ExampleService {
     public void addExampleLearn(ExampleLearnBase elb) {
         exampleDaoImpl.addExampleLearn(elb);
     }
+
+    public List<ExampleLearnBase> queryElbAll() {
+        return exampleDaoImpl.queryElbAll();
+    }
+
+    public ExampleLearnBase fetchExampleLearnById(Long id) {
+        return exampleDaoImpl.fetchExampleLearnById(id);
+    }
+
+    public void save(ExampleBase el) {
+        exampleDaoImpl.save(el);
+    }
 }

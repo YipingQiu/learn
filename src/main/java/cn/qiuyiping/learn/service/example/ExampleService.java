@@ -17,4 +17,10 @@ public interface ExampleService {
     public List<ExampleBase> queryAll();
 
     public void addExampleLearn(ExampleLearnBase elb);
+
+    public List<ExampleLearnBase> queryElbAll();
+
+    public ExampleLearnBase fetchExampleLearnById(Long id);
+
+    public void save(ExampleBase el);
 }
